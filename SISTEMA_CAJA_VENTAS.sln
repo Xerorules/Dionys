@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAPA_ENTIDAD", "CAPA_ENTIDAD\CAPA_ENTIDAD.csproj", "{B2479828-295F-47C2-8B8A-A6FA65C29A16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAPA_DATOS", "CAPA_DATOS\CAPA_DATOS.csproj", "{33D3205C-A839-41F8-B9A5-F73989898B51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAPA_NEGOCIO", "CAPA_NEGOCIO\CAPA_NEGOCIO.csproj", "{07766FFD-D6E2-4DD3-B017-32F04F52D248}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Imagenes", "Imagenes", "{209A97A9-2DD5-41FD-A432-5CC42E1FA7F1}"
+	ProjectSection(SolutionItems) = preProject
+		D:\SISTEMA NUEVO\SYSDIONYS_PROYECTO\DIONYS_ERP\ICONOS\FONDO_LOGIN.png = D:\SISTEMA NUEVO\SYSDIONYS_PROYECTO\DIONYS_ERP\ICONOS\FONDO_LOGIN.png
+		..\..\..\..\Downloads\LOGO_GRUPO_DIONYS.png = ..\..\..\..\Downloads\LOGO_GRUPO_DIONYS.png
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VISTA", "WindowsFormsApplication1\VISTA.csproj", "{EA4DED1E-18F9-4F95-961A-1DE8CF7FACF3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modulo", "Modulo", "{93C06EAC-785A-418D-8F70-87B74496CC2B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ICONOS", "ICONOS", "{563C98AF-C7BE-4EC9-BFAA-0A6ACD542F09}"
+	ProjectSection(SolutionItems) = preProject
+		ICONOS\54F.jpg = ICONOS\54F.jpg
+		ICONOS\fondo-formulario-seo.jpg = ICONOS\fondo-formulario-seo.jpg
+		ICONOS\img-begin.png = ICONOS\img-begin.png
+		ICONOS\p_c_ER-380.png = ICONOS\p_c_ER-380.png
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B2479828-295F-47C2-8B8A-A6FA65C29A16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2479828-295F-47C2-8B8A-A6FA65C29A16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2479828-295F-47C2-8B8A-A6FA65C29A16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2479828-295F-47C2-8B8A-A6FA65C29A16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33D3205C-A839-41F8-B9A5-F73989898B51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33D3205C-A839-41F8-B9A5-F73989898B51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33D3205C-A839-41F8-B9A5-F73989898B51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33D3205C-A839-41F8-B9A5-F73989898B51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07766FFD-D6E2-4DD3-B017-32F04F52D248}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07766FFD-D6E2-4DD3-B017-32F04F52D248}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07766FFD-D6E2-4DD3-B017-32F04F52D248}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07766FFD-D6E2-4DD3-B017-32F04F52D248}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA4DED1E-18F9-4F95-961A-1DE8CF7FACF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA4DED1E-18F9-4F95-961A-1DE8CF7FACF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA4DED1E-18F9-4F95-961A-1DE8CF7FACF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA4DED1E-18F9-4F95-961A-1DE8CF7FACF3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
