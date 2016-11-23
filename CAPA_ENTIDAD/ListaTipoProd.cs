@@ -9,7 +9,6 @@ namespace CAPA_ENTIDAD
     public class ListaTipoProd
     {
         public string texto { get; set; }
-
         public string value { get; set; }
     }
 }

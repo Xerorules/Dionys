@@ -21,6 +21,7 @@ namespace CAPA_NEGOCIO
             return OBJLOGUEO.VALIDAR_USUARIO(USUARIO, CONTRASENA, ID_SEDE);
         }
 
+        
         public DataTable LISTAR_EMPRESA()
         {
             return OBJLOGUEO.LISTAR_EMPRESA();
@@ -32,6 +33,14 @@ namespace CAPA_NEGOCIO
         public DataTable PUNTO_VENTA(string ID_SEDE)
         {
             return OBJLOGUEO.PUNTO_VENTA(ID_SEDE);
+        }
+        public DataTable CONSULTAR_VISTA_EMPRESA(String ID_EMPRESA)
+        {
+            return OBJLOGUEO.CONSULTAR_VISTA_EMPRESA(ID_EMPRESA);
+        }
+        public DataTable CONSULTAR_VISTA_SEDE(String ID_SEDE)
+        {
+            return OBJLOGUEO.CONSULTAR_VISTA_SEDE(ID_SEDE);
         }
     }
 }

@@ -166,14 +166,76 @@ namespace WindowsFormsApplication1
                 Properties.Settings.Default.id_caja = OBJVARIABLES.Idcaja.ToString();
                 Properties.Settings.Default.serie = VG_SERIE();
                 Properties.Settings.Default.tipo_cambio = OBJVARIABLES.tipo_cambio;
+                Properties.Settings.Default.punto_venta = VG_ID_PUNTOVENTA();
+                Properties.Settings.Default.id_empleado = OBJVARIABLES.id_empleado;
+                Properties.Settings.Default.nomempleado = OBJVARIABLES.nombre_empleado;
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Upgrade();
                 OBJCAJA.id_caja = Properties.Settings.Default.id_caja;
                 OBJCAJA.id_puntoventa = OBJVARIABLES.id_puntoventa;
                 OBJCAJA.id_empleado = OBJVARIABLES.id_empleado;
                 OBJCAJA.id_empresa = OBJVARIABLES.id_empresa;
+
                 OBJCAJA.nombre_empleado = OBJVARIABLES.nombre_empleado;
                 OBJCAJA.tipo_cambio = OBJVARIABLES.tipo_cambio;
                 OBJCAJA.sede = OBJVARIABLES.sede;
                 
+                /*---VARIABLE id_sede GUARDA VALOR AUN DESPUES DE CERRAR LA APLICACION---*/
+                Properties.Settings.Default.id_sede = OBJVARIABLES.sede;
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Upgrade();
+                Program.id_sede = OBJVARIABLES.sede;
+                /*-----------------------------------------------------------------------*/
+                /*----VARIABLE punto_venta GUARDA VALOR AUN DESPUES DE CERRAR LA APP-----*/
+                Properties.Settings.Default.punto_venta = OBJVARIABLES.id_puntoventa;
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Upgrade();
+                /*-----------------------------------------------------------------------*/
+                /*----VARIABLE id_empresa GUARDA VALOR AUN DESPUES DE CERRAR LA APP-----*/
+                Properties.Settings.Default.id_empresa = OBJVARIABLES.id_empresa;
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Upgrade();
+                /*-----------------------------------------------------------------------*/
+                /*----VARIABLE id_empresa GUARDA VALOR AUN DESPUES DE CERRAR LA APP-----*/
+                Properties.Settings.Default.nomempleado = OBJVARIABLES.nombre_empleado;
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Upgrade();
+                /*-----------------------------------------------------------------------*/
+                /*----------------SETEANDO  NOM_SEDE----------------------------------*/
+                if (Properties.Settings.Default.id_sede == "001") { Properties.Settings.Default.nomsede = "TOBOGANES DE SANTA ANA"; }
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Upgrade();
+                if (Properties.Settings.Default.id_sede == "002") { Properties.Settings.Default.nomsede = "CLUB LAS LEÑAS"; }
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Upgrade();
+                if (Properties.Settings.Default.id_sede == "003") { Properties.Settings.Default.nomsede = "COMPLEJO TURISTICO DIONYS SAC"; }
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Upgrade();
+                if (Properties.Settings.Default.id_sede == "004") { Properties.Settings.Default.nomsede = "CENTRO COMERCIAL DIONYS"; }
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Upgrade();
+                if (Properties.Settings.Default.id_sede == "005") { Properties.Settings.Default.nomsede = "ASESOR"; }
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Upgrade();
+                /*-----------------------------------------------------------------------*/
+                /*-----------------------------------------------------------------------*/
+                /*----------------SETEANDO  NOM_EMPRESA----------------------------------*/
+                if (Properties.Settings.Default.id_empresa == "001") { Properties.Settings.Default.nomempresa = "CENTRO DE RECREACIONES DIONYS SAC"; }
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Upgrade();
+                if (Properties.Settings.Default.id_empresa == "002") { Properties.Settings.Default.nomempresa = "HOSTAL DIONYS SAC"; }
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Upgrade();
+                if (Properties.Settings.Default.id_empresa == "003") { Properties.Settings.Default.nomempresa = "COMPLEJO TURISTICO DIONYS SAC"; }
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Upgrade();
+                if (Properties.Settings.Default.id_empresa == "004") { Properties.Settings.Default.nomempresa = "CENTRO COMERCIAL DIONYS"; }
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Upgrade();
+                if (Properties.Settings.Default.id_empresa == "005") { Properties.Settings.Default.nomempresa = "INTERCOMPANY & SEÑOR DE HUANCA"; }
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Upgrade();
+                /*-----------------------------------------------------------------------*/
                 OBJCAJA.Show();
                 this.Visible = false;
 

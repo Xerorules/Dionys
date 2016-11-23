@@ -11,11 +11,14 @@ using CAPA_ENTIDAD;
 using CAPA_NEGOCIO;
 using System.Runtime.InteropServices;
 using System.Collections;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace WindowsFormsApplication1
 {
     public partial class InterfazVenta : Form
     {
+        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["sql"].ConnectionString);
         #region variables globales 
         public string v_id_caja;
         public string v_serie;
@@ -43,6 +46,7 @@ namespace WindowsFormsApplication1
         public string bc_id_cliente;
         public string bc_ruc_dni;
         public string bc_descripcion;
+        
         #endregion
 
         public string[] valor = new string[20];
@@ -51,28 +55,31 @@ namespace WindowsFormsApplication1
         public String MON = "";
         public String WEB = "";
         public double VUELTO = 0.00, PAGA = 0.00;
-
+        
         //public DataTable detallebien = new DataTable();
         public DataTable vPdt_detBien = new DataTable();
-
-
 
         public InterfazVenta()
         {
             InitializeComponent();
+            
         }
 
         private void InterfazVenta_Load(object sender, EventArgs e)
         {
+            lblEmpresa.Text = Properties.Settings.Default.nomempresa;
+            lblUsuario.Text = Properties.Settings.Default.nomempleado;
+            lblSede.Text = Properties.Settings.Default.nomsede;
+            lblFecha.Text = DateTime.Today.ToShortDateString();
+            txtCLIENTE_ID.Enabled = false;
             TIPO_PAGO();
-            TIPO_DOC();
             LLENAR_CLASE_BIEN();
             LLENAR_MENU_BIENES();
             ESTRUCTURA_DETALLEBIEN();
             lblCajaIDVentas.Text = Properties.Settings.Default.id_caja;
             dgvBIEN_VENTA.Visible = false;
-            //LLENAR_GRILLA();
-            //DataTable vPdt_detBien = (DataTable)detalle;
+            LLENAR_GRILLA();
+           // DataTable vPdt_detBien = (DataTable)detalle;
 
             /*----------*/
             //crea boton Eliminar en el gridview
@@ -109,10 +116,11 @@ namespace WindowsFormsApplication1
         E_MANT_CLIENTE E_OBJMANT_CLIENTE = new E_MANT_CLIENTE();
         E_VENTA_Y_DETALLE E_OBJMANT_VENTADET = new E_VENTA_Y_DETALLE();
         E_CAJA_KARDEX E_OBJCAJA_KARDEX = new E_CAJA_KARDEX();
-        
+
 
         #endregion
 
+       
 
 
         void LLENAR_CLASE_BIEN()
@@ -167,17 +175,6 @@ namespace WindowsFormsApplication1
                 cboTIPOPAGO.SelectedIndex = 0;
                
         }
-
-        void TIPO_DOC()
-        {
-            List<ListaTipoProd> ListDOC = new List<ListaTipoProd>();
-
-            ListDOC.Add(new ListaTipoProd { texto = "TICKET BOLETA", value = "TB" });
-            cboTIPO_DOC.DataSource = ListDOC;
-            cboTIPO_DOC.DisplayMember = "texto";
-            cboTIPO_DOC.ValueMember = "value";
-            cboTIPO_DOC.SelectedIndex = 0;
-        }
         
 
 
@@ -186,7 +183,7 @@ namespace WindowsFormsApplication1
 
             DataTable dt = new DataTable();
             E_OBJVENTAS.ID_CLASE = cboCLASE_BIEN.SelectedValue.ToString();
-            E_OBJVENTAS.ID_EMPRESA = v_id_empresa;
+            E_OBJVENTAS.ID_EMPRESA = Properties.Settings.Default.id_empresa;
             dt = N_OBJVENTAS.BIEN_X_CLASE(E_OBJVENTAS); //llenar el datatable con los datos del filtrado de bienes por clase
 
             for (int i = 0; i < dt.Rows.Count; i++)
@@ -302,7 +299,99 @@ namespace WindowsFormsApplication1
             lblTOTAL.Text = total.ToString("N2");
             
         }
+        /*-----------------------AUTOCOMPLETAR---------------------------*/
+        void autocompletar_DESCRIPCION()
+        {
+            try
+            {
+                txtCLIENTE_VENTA.AutoCompleteMode = AutoCompleteMode.Suggest;
+                txtCLIENTE_VENTA.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                txtCLIENTE_RUC.AutoCompleteMode = AutoCompleteMode.Suggest;
+                txtCLIENTE_RUC.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                AutoCompleteStringCollection col = new AutoCompleteStringCollection();
+                AutoCompleteStringCollection ruc = new AutoCompleteStringCollection();
+                
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT DESCRIPCION FROM CLIENTE", con);
+               /* DataTable dt = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);*/
+                SqlDataReader dr = null;
+                
+                dr = cmd.ExecuteReader();
+                
+                while (dr.Read())
+                {
+                    col.Add(dr["DESCRIPCION"].ToString());
+                }
+                dr.Close();
+                txtCLIENTE_VENTA.AutoCompleteCustomSource = col;
+                con.Close();
+                con.Open();
+                if (txtCLIENTE_VENTA.Text.Length >= 6) {
+                    SqlCommand cmv = new SqlCommand("SELECT ID_CLIENTE,RUC_DNI FROM CLIENTE where DESCRIPCION = '" + txtCLIENTE_VENTA.Text + "'", con);
+                    DataTable dt = new DataTable();
+                    SqlDataAdapter da = new SqlDataAdapter(cmv);
+                    da.Fill(dt);
+                    txtCLIENTE_ID.Text = dt.Rows[0][0].ToString();
+                    txtCLIENTE_RUC.Text = dt.Rows[0][1].ToString();
+                    con.Close();
+                } else { con.Close();}
+            }
 
+            catch
+            {
+            }
+        }
+
+        void autocompletar_RUCDNI()
+        {
+            try
+            {
+
+                
+                txtCLIENTE_RUC.AutoCompleteMode = AutoCompleteMode.Suggest;
+                txtCLIENTE_RUC.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                AutoCompleteStringCollection col = new AutoCompleteStringCollection();
+
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+                SqlCommand cmd = new SqlCommand("SELECT RUC_DNI FROM CLIENTE", con);
+                
+                SqlDataReader dr = null;
+
+                dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    col.Add(dr["RUC_DNI"].ToString());
+                }
+                dr.Close();
+                txtCLIENTE_RUC.AutoCompleteCustomSource = col;
+                con.Close();
+                con.Open();
+                if (txtCLIENTE_RUC.Text.Length >=4)
+                {
+                    SqlCommand cmv = new SqlCommand("SELECT ID_CLIENTE,DESCRIPCION FROM CLIENTE where RUC_DNI = '" + txtCLIENTE_RUC.Text + "'", con);
+                    DataTable dt = new DataTable();
+                    SqlDataAdapter da = new SqlDataAdapter(cmv);
+                    da.Fill(dt);
+                    txtCLIENTE_ID.Text = dt.Rows[0][0].ToString();
+                    txtCLIENTE_VENTA.Text = dt.Rows[0][1].ToString();
+                    con.Close();
+                }
+                else { con.Close(); }
+            }
+
+            catch
+            {
+            }
+        }
+
+
+        /*---------------------------------------------------------------*/
 
 
         private void cboCLASE_BIEN_SelectedIndexChanged(object sender, EventArgs e)
@@ -312,24 +401,9 @@ namespace WindowsFormsApplication1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            BUSCAR_CLIENTE objbcliente = new BUSCAR_CLIENTE();
-            objbcliente.bc_id_caja = v_id_caja;
-            objbcliente.bc_id_puntoventa = v_id_puntoventa;
-            objbcliente.bc_id_empleado = v_id_empleado;
-            objbcliente.bc_id_empresa = v_id_empresa;
-            objbcliente.bc_nombre_empleado = v_nombre_empleado;
-            objbcliente.bc_tipo_cambio = v_tipo_cambio;
-            objbcliente.bc_sede = v_sede;
-            objbcliente.bc_fchapertura = v_fchapertura;
-            objbcliente.bc_fchacierre = v_fchacierre;
-            objbcliente.bc_saldo_ini = v_saldo_ini;
-            objbcliente.bc_saldo_fin = v_saldo_fin;
-            objbcliente.bcPRECIO_BIEN = PRECIO_BIEN;
-            objbcliente.bcidbien = idbien;
-            objbcliente.bcvalor = valor;
-            
-            //this.Visible = false; 
-            objbcliente.ShowDialog();
+            txtCLIENTE_VENTA.Text = string.Empty;
+            txtCLIENTE_ID.Text = string.Empty;
+            txtCLIENTE_RUC.Text = string.Empty;
             
         }
 
@@ -539,7 +613,7 @@ namespace WindowsFormsApplication1
             {
                 E_OBJMANT_VENTADET.ID_VENTA = string.Empty;
                 E_OBJMANT_VENTADET.SERIE = Properties.Settings.Default.serie;
-                E_OBJMANT_VENTADET.TIPO_DOC = cboTIPO_DOC.SelectedValue.ToString();
+                E_OBJMANT_VENTADET.TIPO_DOC = cboTIPO_DOC.SelectedItem.ToString();
                 E_OBJMANT_VENTADET.MONEDA = "S";
                 E_OBJMANT_VENTADET.VALOR_VENTA = Convert.ToDouble(lblSUBTOTAL.Text);
                 E_OBJMANT_VENTADET.IGV = Convert.ToDouble(lblIGV.Text);
@@ -573,7 +647,7 @@ namespace WindowsFormsApplication1
         void LIMPIAR_VENTA()
         {
             DataTable dt = (DataTable)vPdt_detBien;
-            cboTIPO_DOC.SelectedIndex = 0;
+            cboTIPO_DOC.SelectedValue = "TB";
             txtCLIENTE_VENTA.Text = string.Empty;
             lblSUBTOTAL.Text = string.Empty;
             lblIGV.Text = string.Empty;
@@ -714,27 +788,30 @@ namespace WindowsFormsApplication1
                     else
                     {
                         MessageBox.Show("INGRESAR UN MONTO MAYOR AL MONTO TOTAL", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                         
+
                     }
                 }
-                ///CREAR MESSAGEBOX DE PREGUNTA PARA FINALIZAR VENTA
+                //CREAR MESSAGEBOX DE PREGUNTA PARA FINALIZAR VENTA
                 //MessageBox.Show("¿QUIERE REALIZAR LA VENTA?", "!!ATENCION!!", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                string message = "¿QUIERE REALIZAR LA VENTA?";
-                string caption = "!!ATENCION!!";
-                MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
-                DialogResult result;
-                result = MessageBox.Show(message, caption, buttons);
-                if (result == System.Windows.Forms.DialogResult.OK)
+                DialogResult result = MessageBox.Show("¿QUIERE REALIZAR LA VENTA?", "!!ATENCION!!", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (result == DialogResult.OK)
                 {
-
                     MANTENIMIENTO_VENTA();
-                    cboTIPO_DOC.SelectedIndex = 0;   //REGRESANDO EL TIPO DE DOC A BOLETA DE VENTA
-
-                } else if (result == System.Windows.Forms.DialogResult.Cancel) {
+                    cboTIPO_DOC.SelectedIndex = 0;//REGRESANDO EL TIPO DE DOC A BOLETA DE VENTA
+                    cboCLASE_BIEN.SelectedIndex = 0;
+                    txtCLIENTE_ID.Text = string.Empty;
+                    txtCLIENTE_RUC.Text = string.Empty;
+                    txtCLIENTE_VENTA.Text = string.Empty;
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    txtCLIENTE_ID.Text = string.Empty;
+                    txtCLIENTE_RUC.Text = string.Empty;
+                    txtCLIENTE_VENTA.Text = string.Empty;
                     LIMPIAR_VENTA();
                 }
-
                 
+                     
                 
                 
             }
@@ -749,7 +826,7 @@ namespace WindowsFormsApplication1
         private void button1_Click(object sender, EventArgs e)
         {
             CAJA OBJCAJA = new CAJA();
-            #region VARIABLES CAJA
+             
             OBJCAJA.txtIDcaja.Text = Properties.Settings.Default.id_caja;
             OBJCAJA.id_empleado = v_id_empleado;
             OBJCAJA.id_puntoventa = v_id_puntoventa;
@@ -757,14 +834,58 @@ namespace WindowsFormsApplication1
             OBJCAJA.tipo_cambio = v_tipo_cambio;
             OBJCAJA.nombre_empleado = v_nombre_empleado;
             OBJCAJA.id_empresa = v_id_empresa;
-            OBJCAJA.Show();
+            OBJCAJA.Visible=true;
             this.Close();
-            #endregion
         }
 
-        private void cboTIPO_DOC_SelectedIndexChanged(object sender, EventArgs e)
+        private void txtCLIENTE_VENTA_TextChanged(object sender, EventArgs e)
         {
+            autocompletar_DESCRIPCION();
+        }
 
+        private void txtCLIENTE_RUC_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtCLIENTE_VENTA_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsLetter(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtCLIENTE_RUC_TextChanged(object sender, EventArgs e)
+        {
+            autocompletar_RUCDNI();
         }
 
         private bool VALIDAR_DATOS()

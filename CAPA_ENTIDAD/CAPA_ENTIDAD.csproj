@@ -54,6 +54,7 @@
     <Compile Include="E_VENTA_Y_DETALLE.cs" />
     <Compile Include="ListaTipoProd.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="T_DETALLE.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

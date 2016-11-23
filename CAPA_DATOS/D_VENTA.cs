@@ -1254,7 +1254,7 @@ namespace CAPA_DATOS
         public DataTable CONSULTA_LISTA_CLIENTES(string CONDICION)
         {
             SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = "SELECT  ID_CLIENTE,TIPO_CLIENTE,DESCRIPCION,RUC_DNI,DIRECCION,EMAIL,ESTADO,UBIDST FROM V_CLIENTE WHERE " + CONDICION + " ORDER BY ID_CLIENTE DESC";
+            cmd.CommandText = "SELECT  ID_CLIENTE,TIPO_CLIENTE,DESCRIPCION,RUC_DNI,ESTADO FROM V_CLIENTE WHERE " + CONDICION + " ORDER BY ID_CLIENTE DESC";
             cmd.CommandType = CommandType.Text;
             cmd.Connection = con;
             if (con.State == ConnectionState.Open)

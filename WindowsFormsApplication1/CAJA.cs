@@ -63,11 +63,11 @@ namespace WindowsFormsApplication1
                 btnVentaRapida.Enabled = true;
             }
 
-
-
+            
         }
         //class para retornar del formulario padre
-        
+
+       
 
         #region OBJETOS
 
@@ -140,9 +140,23 @@ namespace WindowsFormsApplication1
                     Properties.Settings.Default.Save();
                     Properties.Settings.Default.Upgrade();
                     /*-----------------------------------------------------------------------*/
-                    /*---VARIABLE id_empresa GUARDA VALOR AUN DESPUES DE CERRAR LA APLICACION---*/
-                    
+                    /*---VARIABLE id_sede GUARDA VALOR AUN DESPUES DE CERRAR LA APLICACION---*/
+                    Properties.Settings.Default.id_sede = OBJVARIABLES.sede;
+                    Properties.Settings.Default.Save();
+                    Properties.Settings.Default.Upgrade();
                     /*-----------------------------------------------------------------------*/
+                    /*----VARIABLE punto_venta GUARDA VALOR AUN DESPUES DE CERRAR LA APP-----*/
+                    Properties.Settings.Default.punto_venta = OBJVARIABLES.id_puntoventa;
+                    Properties.Settings.Default.Save();
+                    Properties.Settings.Default.Upgrade();
+                    /*-----------------------------------------------------------------------*/
+                    /*----VARIABLE id_empresa GUARDA VALOR AUN DESPUES DE CERRAR LA APP-----*/
+                    //Properties.Settings.Default.id_empresa = OBJVARIABLES.id_empresa;
+                    //Properties.Settings.Default.Save();
+                    //Properties.Settings.Default.Upgrade();
+                    /*-----------------------------------------------------------------------*/
+                  
+                    
                     objint.v_id_empleado = id_empleado;
                     objint.v_id_puntoventa = id_puntoventa;
                     Program.id_empresa = id_empresa;
@@ -269,13 +283,13 @@ namespace WindowsFormsApplication1
                 objventa.lblCajaIDVentas.Text = Program.id_caja;
                 objventa.v_id_empleado = id_empleado;
                 objventa.v_id_puntoventa = id_puntoventa;
-                objventa.v_id_empresa = id_empresa;
+                objventa.v_id_empresa = Program.id_empresa;
                 objventa.v_nombre_empleado = nombre_empleado;
                 objventa.v_tipo_cambio = tipo_cambio;
                 objventa.v_sede = sede;
-                objventa.ShowDialog();
+                objventa.Show();
                 this.Width = 1079;
-                this.Hide();
+                this.Visible = false;
             }
             else
             {

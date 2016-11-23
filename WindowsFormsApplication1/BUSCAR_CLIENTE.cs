@@ -63,17 +63,19 @@ namespace WindowsFormsApplication1
             CARGAR_DATOS(CONCATENAR_CONDICION());
             cboMC_DEPARTAMENTO_SelectedIndexChanged(sender, e);
             cboMC_PROVINCIA_SelectedIndexChanged(sender, e);
-            DataTable detalle = (DataTable)OBJINT.vPdt_detBien;
+            //DataTable detalle = (DataTable)OBJINT.vPdt_detBien;
 
 
 
-    }
+        }
 
         #region OBJETOS
         E_MANT_CLIENTE E_OBJCLIENTE = new E_MANT_CLIENTE();
         N_VENTA N_OBJCLIENTE = new N_VENTA();
-        InterfazVenta OBJINT = new InterfazVenta();
-        
+
+       
+
+
 
         #endregion
 
@@ -118,7 +120,7 @@ namespace WindowsFormsApplication1
 
         private void cboMC_DISTRITO_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            //
         }
 
         void autocompletar_DESCRIPCION()
@@ -128,7 +130,7 @@ namespace WindowsFormsApplication1
                 textBox1.AutoCompleteMode = AutoCompleteMode.Suggest;
                 textBox1.AutoCompleteSource = AutoCompleteSource.CustomSource;
                 AutoCompleteStringCollection col = new AutoCompleteStringCollection();
-                
+
 
                 con.Open();
                 SqlCommand cmd = new SqlCommand("SELECT DESCRIPCION FROM CLIENTE", con);
@@ -137,12 +139,12 @@ namespace WindowsFormsApplication1
                 while (dr.Read())
                 {
                     col.Add(dr["DESCRIPCION"].ToString());
-                    
+
                 }
                 dr.Close();
 
                 textBox1.AutoCompleteCustomSource = col;
-                
+
                 con.Close();
             }
             catch
@@ -175,7 +177,7 @@ namespace WindowsFormsApplication1
             }
         }
 
-        
+       
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             autocompletar_DESCRIPCION();
@@ -257,15 +259,20 @@ namespace WindowsFormsApplication1
         {
             if (this.dgvClientes.Columns[e.ColumnIndex].Name == "colBotones")
             {
+               // T_DETALLE detalle = new T_DETALLE();
+                InterfazVenta OBJINT = new InterfazVenta();
                 string id_CLIENTE_dgv = dgvClientes.Rows[e.RowIndex].Cells["ID_CLIENTE"].Value.ToString();
                 string id_DNIRUC_dgv = dgvClientes.Rows[e.RowIndex].Cells["RUC_DNI"].Value.ToString();
                 string id_DESCRIPCION_dgv = dgvClientes.Rows[e.RowIndex].Cells["DESCRIPCION"].Value.ToString();
-                OBJINT.bc_id_cliente = id_CLIENTE_dgv;
-                OBJINT.bc_ruc_dni = id_DNIRUC_dgv;
-                OBJINT.bc_descripcion = id_DESCRIPCION_dgv;
-                OBJINT.txtCLIENTE_VENTA.Text = id_DESCRIPCION_dgv;
-                OBJINT.txtCLIENTE_RUC.Text = id_DNIRUC_dgv;
-                OBJINT.txtCLIENTE_ID.Text = id_CLIENTE_dgv;
+              
+                /*-------------REVISAR CODIGO---------------*/
+                OBJINT.txtCLIENTE_VENTA.Text = dgvClientes.Rows[e.RowIndex].Cells["DESCRIPCION"].Value.ToString();
+
+                OBJINT.txtCLIENTE_RUC.Text = dgvClientes.Rows[e.RowIndex].Cells["RUC_DNI"].Value.ToString();
+
+                OBJINT.txtCLIENTE_ID.Text = dgvClientes.Rows[e.RowIndex].Cells["ID_CLIENTE"].Value.ToString();
+                
+               /*-------------REVISAR CODIGO---------------*/
                 OBJINT.v_id_caja = Program.id_caja;
                 OBJINT.lblCajaIDVentas.Text = Program.id_caja;
                 OBJINT.v_id_puntoventa = bc_id_puntoventa;
@@ -278,9 +285,7 @@ namespace WindowsFormsApplication1
                 OBJINT.v_fchacierre = bc_fchacierre;
                 OBJINT.v_saldo_ini = bc_saldo_ini;
                 OBJINT.v_saldo_fin = bc_saldo_fin;
-                //OBJINT.vPdt_detBien = (DataTable)detalle;
-                OBJINT.ShowDialog();
-                //OBJINT.ACTUALIZAR_TOTALES();
+                //OBJINT.Visible = true;/*REVISAR HACER QUE MANDE VALORES SIN LODEAR*/
                 this.Close();
             }
 
