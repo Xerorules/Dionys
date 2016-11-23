@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using System.Configuration;
 
 using CAPA_ENTIDAD;
 using CAPA_NEGOCIO;
@@ -22,8 +24,8 @@ namespace WindowsFormsApplication1
         public string m_nombre_empleado;
         public string m_tipo_cambio;
         public string m_sede;
+        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["sql"].ConnectionString);
 
-        
 
         public MOVIMIENTOS()
         {
@@ -281,6 +283,7 @@ namespace WindowsFormsApplication1
                 cboTIPO_MOV.Enabled = true;
                 cboTIPO_PAGO.Enabled = true;
                 txtMONTO.ReadOnly = false;
+                rdbSOLES.Checked = true;
                 rdbSOLES.Enabled = false;
                 rdbDOLARES.Enabled = false;
                 txtDESCRIPCION.ReadOnly = false;
@@ -333,8 +336,8 @@ namespace WindowsFormsApplication1
                     E_OBJCAJA_KARDEX.ID_COMPVENT = string.Empty;
                 }
 
-                E_OBJCAJA_KARDEX.ID_TIPOMOV = cboTIPO_MOV.SelectedText.ToString();
-                E_OBJCAJA_KARDEX.ID_TIPOPAGO = cboTIPO_PAGO.SelectedText.ToString();
+                E_OBJCAJA_KARDEX.ID_TIPOMOV = cboTIPO_MOV.SelectedValue.ToString();
+                E_OBJCAJA_KARDEX.ID_TIPOPAGO = cboTIPO_PAGO.SelectedValue.ToString();
 
                 E_OBJCAJA_KARDEX.IMPORTE = Convert.ToDouble(txtMONTO.Text.ToString());
 
@@ -451,9 +454,14 @@ namespace WindowsFormsApplication1
 
         public void ESTADO_TEXBOX_VENTA(int ESTADO)
         {
+            txtID_DOC.Text = string.Empty;
+            txtPERSONA.Text = string.Empty;
+            txtNUM_DOCUMENTO.Text = string.Empty;
+            txtMONEDA.Text = string.Empty;
+            txtSALDO.Text = string.Empty;
             if (ESTADO == 1)//ESTADO DE INGRESO POR VENTA
             {
-                txtID_DOC.Enabled = true;
+                txtID_DOC.ReadOnly = false;
                 txtPERSONA.ReadOnly = true;
                 txtNUM_DOCUMENTO.ReadOnly = true;
                 txtMONEDA.ReadOnly = true;
@@ -467,11 +475,7 @@ namespace WindowsFormsApplication1
                 txtMONEDA.ReadOnly = true;
                 txtSALDO.ReadOnly = true;
             }
-            txtID_DOC.Text = string.Empty;
-            txtPERSONA.Text = string.Empty;
-            txtNUM_DOCUMENTO.Text = string.Empty;
-            txtMONEDA.Text = string.Empty;
-            txtSALDO.Text = string.Empty;
+            
         }
 
 
@@ -528,7 +532,7 @@ namespace WindowsFormsApplication1
             FILTRAR_CAJA_KARDEX(0, "1", ""); //AQUI ACTUALIZO Y AGO QUE EL FILTRO SEA POR TODOS LO ACTIVOS 
             rdbACTIVOS.Checked = false;
             rdbANULADOS.Checked = false;
-            rdbANULADOS.Checked = false;
+            rdbTODOS.Checked = true;
             txtDATA_BUSQUEDA.Text = string.Empty; //LIMPIAR EL CAMPO DE BUSQUEDA
             dgvMOV_CAJAKARDEX.CurrentCell.Selected = false; //SELECCIONA EL PPRIMER REGISTRO
             SELECCIONAR_REGISTRO_CARGADATA(); //AQUI CARGO POR PRIMERA VEZ TODOS LOS CAMPOS SELECIONADOS DE LA GRILLA
@@ -709,14 +713,22 @@ namespace WindowsFormsApplication1
                 rdbANULADOS.Checked = true;
                 dgvMOV_CAJAKARDEX.SelectedRows.Equals(0); //SELECCIONA EL PPRIMER REGISTRO  /*REVISAR QUE CUMPLA LA ACCION*/<<<------------
                 SELECCIONAR_REGISTRO_CARGADATA(); //AQUI CARGO POR PRIMERA VEZ TODOS LOS CAMPOS SELECIONADOS DE LA GRILLA
-
-
-                //CON ESTO ANULO LA VENTA DEL CONTROL DE GALERIA PARA MANTENER EL ORDEN - ANULAR EL PAGO Y DEJARLO EN PENDIENTE
-                //if (Session["SEDE"].ToString() == "004")
-                //{
-                //    N_OBJVENTAS.ACTUALIZAR_MODIFICACIONES_CONTROL_GALERIA(txtID_DOC.Text, "2");
-                //}
                 
+                /*
+                if (txtID_MOVIMIENTO.Text != string.Empty)
+                {
+                    con.Open();
+                    string id_movent
+                    SqlCommand cmv = new SqlCommand("SELECT ID_CLIENTE,RUC_DNI FROM CLIENTE where DESCRIPCION = '" + txtCLIENTE_VENTA.Text + "'", con);
+                    DataTable dt = new DataTable();
+                    SqlDataAdapter da = new SqlDataAdapter(cmv);
+                    da.Fill(dt);
+                }
+                else { con.Close(); }
+
+                */
+
+
             }
             else
             {
@@ -1055,6 +1067,12 @@ namespace WindowsFormsApplication1
         private void dgvMOV_CAJAKARDEX_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             SELECCIONAR_REGISTRO_CARGADATA();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            
         }
     }
 }

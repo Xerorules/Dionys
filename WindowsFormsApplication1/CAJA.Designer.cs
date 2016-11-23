@@ -182,7 +182,7 @@
             // 
             // btnAbrirCaja
             // 
-            this.btnAbrirCaja.BackColor = System.Drawing.Color.Maroon;
+            this.btnAbrirCaja.BackColor = System.Drawing.Color.Brown;
             this.btnAbrirCaja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAbrirCaja.Font = new System.Drawing.Font("Gabriola", 17.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAbrirCaja.ForeColor = System.Drawing.Color.White;
@@ -197,7 +197,7 @@
             // 
             // btnCERRARCAJA
             // 
-            this.btnCERRARCAJA.BackColor = System.Drawing.Color.Maroon;
+            this.btnCERRARCAJA.BackColor = System.Drawing.Color.Brown;
             this.btnCERRARCAJA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCERRARCAJA.Font = new System.Drawing.Font("Gabriola", 17.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCERRARCAJA.ForeColor = System.Drawing.Color.White;
@@ -212,7 +212,7 @@
             // 
             // btnSalirCaja
             // 
-            this.btnSalirCaja.BackColor = System.Drawing.Color.Maroon;
+            this.btnSalirCaja.BackColor = System.Drawing.Color.Brown;
             this.btnSalirCaja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalirCaja.Font = new System.Drawing.Font("Gabriola", 17.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalirCaja.ForeColor = System.Drawing.Color.White;
@@ -313,7 +313,7 @@
             this.button2.BackColor = System.Drawing.Color.White;
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.Maroon;
+            this.button2.ForeColor = System.Drawing.Color.Brown;
             this.button2.Location = new System.Drawing.Point(1047, 226);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(32, 185);

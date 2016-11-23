@@ -628,8 +628,8 @@ namespace WindowsFormsApplication1
                 N_OBJVENTAS.MANTENIMIENTO_VENTA(E_OBJMANT_VENTADET); //AQUI CARGO LA VENTA
                 MANTENIMIENTO_VENTADETALLE();                        // AQUI CARGO EL DETALLE DE LA VENTA
                 MANTENIMIENTO_CAJA_KARDEX();//AQUI LLAMO A MI PROCEDIMIENTO PAR GENERAR EL INGRESO EN CAJA KARDEX
-                //IMPRIMIR_SPOOL();   //
-                //this.Refresh();
+                //IMPRIMIR_SPOOL();   /*<<<<<<<FALTA IMPLEMENTAR IMPRIMIR>>>>>>*/
+               
             }
             catch (Exception)
             {
