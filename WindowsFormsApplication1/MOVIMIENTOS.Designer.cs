@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtID_MOVIMIENTO = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -74,7 +74,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgvMOV_CAJAKARDEX = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.rdbTODOS = new System.Windows.Forms.RadioButton();
             this.btnBUSCAR = new System.Windows.Forms.Button();
@@ -633,14 +632,14 @@
             this.dgvMOV_CAJAKARDEX.MultiSelect = false;
             this.dgvMOV_CAJAKARDEX.Name = "dgvMOV_CAJAKARDEX";
             this.dgvMOV_CAJAKARDEX.ReadOnly = true;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Info;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvMOV_CAJAKARDEX.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Info;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvMOV_CAJAKARDEX.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvMOV_CAJAKARDEX.RowHeadersVisible = false;
             this.dgvMOV_CAJAKARDEX.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvMOV_CAJAKARDEX.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -653,7 +652,6 @@
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
             this.groupBox2.CausesValidation = false;
-            this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.btnSalir);
             this.groupBox2.Controls.Add(this.rdbTODOS);
             this.groupBox2.Controls.Add(this.btnBUSCAR);
@@ -672,26 +670,14 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.UseCompatibleTextRendering = true;
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.DarkCyan;
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(1177, 15);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(180, 40);
-            this.button1.TabIndex = 39;
-            this.button1.Text = "ELIMINAR VENTA";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // btnSalir
             // 
             this.btnSalir.BackColor = System.Drawing.Color.DarkCyan;
             this.btnSalir.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalir.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.btnSalir.Location = new System.Drawing.Point(1177, 61);
+            this.btnSalir.Location = new System.Drawing.Point(1177, 23);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(180, 37);
+            this.btnSalir.Size = new System.Drawing.Size(180, 68);
             this.btnSalir.TabIndex = 38;
             this.btnSalir.Text = "SALIR";
             this.btnSalir.UseVisualStyleBackColor = false;
@@ -754,6 +740,7 @@
             this.cboTIPO_BUSQUEDA.Name = "cboTIPO_BUSQUEDA";
             this.cboTIPO_BUSQUEDA.Size = new System.Drawing.Size(200, 26);
             this.cboTIPO_BUSQUEDA.TabIndex = 16;
+            this.cboTIPO_BUSQUEDA.SelectedIndexChanged += new System.EventHandler(this.cboTIPO_BUSQUEDA_SelectedIndexChanged);
             // 
             // txtDATA_BUSQUEDA
             // 
@@ -1068,7 +1055,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox txtID_DOC;
     }
 }

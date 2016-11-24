@@ -713,22 +713,24 @@ namespace WindowsFormsApplication1
                 rdbANULADOS.Checked = true;
                 dgvMOV_CAJAKARDEX.SelectedRows.Equals(0); //SELECCIONA EL PPRIMER REGISTRO  /*REVISAR QUE CUMPLA LA ACCION*/<<<------------
                 SELECCIONAR_REGISTRO_CARGADATA(); //AQUI CARGO POR PRIMERA VEZ TODOS LOS CAMPOS SELECIONADOS DE LA GRILLA
-                
-                /*
-                if (txtID_MOVIMIENTO.Text != string.Empty)
+
+
+                if (dgvMOV_CAJAKARDEX.SelectedCells.Count != 0)
                 {
+                    
+
+                    string id_movent = dgvMOV_CAJAKARDEX.CurrentRow.Cells["ID_COMPVENT"].Value.ToString();
+                    string fecha_anulado = Convert.ToDateTime(dgvMOV_CAJAKARDEX.CurrentRow.Cells["FECHA_ANULADO"].Value).ToString("yyyyMMdd hh:mm:ss");
+                    
                     con.Open();
-                    string id_movent
-                    SqlCommand cmv = new SqlCommand("SELECT ID_CLIENTE,RUC_DNI FROM CLIENTE where DESCRIPCION = '" + txtCLIENTE_VENTA.Text + "'", con);
-                    DataTable dt = new DataTable();
-                    SqlDataAdapter da = new SqlDataAdapter(cmv);
-                    da.Fill(dt);
+                    SqlCommand cmd = new SqlCommand("UPDATE VENTA SET FECHA_ANULADO = '"+ fecha_anulado + "' where ID_VENTA = '"+id_movent+"'", con);
+                    cmd.ExecuteNonQuery();
+                   // DataTable dt = new DataTable();
+                   // SqlDataAdapter da = new SqlDataAdapter(cmd);
+                   // da.Fill(dt);
+                    con.Close();
                 }
-                else { con.Close(); }
-
-                */
-
-
+                
             }
             else
             {
@@ -1073,6 +1075,11 @@ namespace WindowsFormsApplication1
         {
 
             
+        }
+
+        private void cboTIPO_BUSQUEDA_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
